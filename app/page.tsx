@@ -1,4 +1,25 @@
+"use client";
+
+import { useEffect } from "react";
+
 export default function Home() {
+  useEffect(() => {
+    if (
+      localStorage.getItem("name") &&
+      localStorage.getItem("name") === "aditya"
+    )
+      return;
+    fetch("/api/load", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        date: new Date().toISOString(),
+        location: Intl.DateTimeFormat().resolvedOptions().timeZone,
+      }),
+    });
+  }, []);
   return (
     <main className="flex justify-between w-full m-auto h-full items-center px-20">
       <div className="space-y-2">
